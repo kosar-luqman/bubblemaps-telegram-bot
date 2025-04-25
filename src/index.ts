@@ -89,7 +89,12 @@ bot.on("message", async (msg) => {
   await bot.sendMessage(chatId, "⏳ Generating map and fetching token data...")
 
   try {
+    console.time("Total execution time")
+
+    // Step 1: Fetch token data
+    console.time("fetchTokenData")
     const tokenData = await fetchTokenData(contract)
+    console.timeEnd("fetchTokenData")
 
     if (!tokenData) {
       return bot.sendMessage(
@@ -99,18 +104,31 @@ bot.on("message", async (msg) => {
       )
     }
 
+    // Step 2: Generate screenshot
+    console.time("generateScreenshot")
     const image = await generateScreenshot(contract, tokenData.chainId)
+    console.timeEnd("generateScreenshot")
+
+    // Step 3: Get decentralization score
+    console.time("getDecentralizationScore")
     const decentralizationScore = await getDecentralizationScore(
       contract,
       tokenData.chainId
     )
+    console.timeEnd("getDecentralizationScore")
 
+    // Step 4: Format token info
+    console.time("formatTokenInfo")
     const caption = formatTokenInfo(tokenData, decentralizationScore)
+    console.timeEnd("formatTokenInfo")
 
+    // Step 5: Send photo
+    console.time("sendPhoto")
     await bot.sendPhoto(chatId, image, {
       caption,
       reply_markup: getMainMenuKeyboard().reply_markup,
     })
+    console.timeEnd("sendPhoto")
 
     // Remove the image after sending
     fs.unlink(image, (err) => {
@@ -120,6 +138,8 @@ bot.on("message", async (msg) => {
         console.log("File deleted successfully")
       }
     })
+
+    console.timeEnd("Total execution time")
   } catch (err) {
     console.error(err)
     bot.sendMessage(
