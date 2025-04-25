@@ -26,11 +26,6 @@ export async function generateScreenshot(
   await page.goto(url, { waitUntil: "networkidle2" })
   // await page.setDefaultTimeout(10000)
 
-  // Zoom out to fit more of the bubble map
-  await page.evaluate(() => {
-    document.body.style.zoom = "1" // Or 0.6, tweak as needed
-  })
-
   // Wait for the map to load
   await page.waitForFunction(
     () => {
