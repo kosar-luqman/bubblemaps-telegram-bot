@@ -8,9 +8,7 @@ export async function generateScreenshot(
 ): Promise<string> {
   const url = `https://app.bubblemaps.io/${blockchain}/token/${contract}`
 
-  const filePath = path.resolve(
-    `./images/screenshot-${contract}-${uuidv4()}.png`
-  )
+  const filePath = path.resolve(`./screenshot-${contract}-${uuidv4()}.png`)
 
   const browser = await puppeteer.launch({
     headless: true,
