@@ -33,8 +33,8 @@ export async function generateScreenshot(
 
   // Set a lower resolution to speed up rendering
   await page.setViewport({
-    width: 1280,
-    height: 800,
+    width: 1600,
+    height: 1200,
     deviceScaleFactor: 1,
   })
 
