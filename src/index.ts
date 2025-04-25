@@ -41,7 +41,7 @@ bot.onText(/\/about/, (msg) => {
   const chatId = msg.chat.id
   bot.sendMessage(
     chatId,
-    "This bot analyzes token contracts and provides information about their decentralization, distribution, and more. Simply send a contract address to get started!",
+    "This bot analyzes token contracts and provides information about their decentralization, distribution, and gets screenshots of bubbles for tokens from bubblemaps website.",
     getMainMenuKeyboard()
   )
 })
@@ -53,11 +53,15 @@ bot.onText(/\/blockchains/, (msg) => {
     chatId,
     "Currently supported blockchains:\n\n" +
       "• Ethereum (ETH)\n" +
-      "• Binance Smart Chain (BSC)\n" +
-      "• Polygon (MATIC)\n" +
+      "• BNB Chain (BNB)\n" +
+      "• Fantom (FTM)\n" +
       "• Avalanche (AVAX)\n" +
+      "• Cronos (CRO)\n" +
       "• Arbitrum (ARB)\n" +
-      "• Optimism (OP)\n\n" +
+      "• Polygon (MATIC)\n" +
+      "• Base (BASE)\n" +
+      "• Solana (SOL)\n" +
+      "• Sonic (SONIC)\n\n" +
       "Send me a token contract address from any of these networks!",
     getMainMenuKeyboard()
   )
