@@ -10,7 +10,9 @@ import { isValidAddress } from "./utils/isValidAddress"
 dotenv.config()
 
 const token = process.env.BOT_TOKEN || ""
-const bot = new TelegramBot(token, { polling: true })
+const bot = new TelegramBot(token, {
+  polling: true,
+})
 
 // Create menu keyboard
 const getMainMenuKeyboard = () => {
@@ -29,6 +31,7 @@ const getMainMenuKeyboard = () => {
 // Start command handler
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id
+
   bot.sendMessage(
     chatId,
     "Send me a token contract address to get its info!",
@@ -124,14 +127,23 @@ bot.on("message", async (msg) => {
 
     // Step 5: Send photo
     console.time("sendPhoto")
-    await bot.sendPhoto(chatId, image, {
-      caption,
-      reply_markup: getMainMenuKeyboard().reply_markup,
-    })
+    await bot.sendPhoto(
+      chatId,
+      image,
+      {
+        caption,
+        reply_markup: getMainMenuKeyboard().reply_markup,
+      },
+      {
+        contentType: "image/png",
+      }
+    )
     console.timeEnd("sendPhoto")
 
     // Remove the image after sending
-    fs.unlink(image, (err) => {
+    const fileName = image.substring(image.indexOf("screenshot-"))
+
+    fs.unlink(fileName, (err) => {
       if (err) {
         console.error("Error deleting file:", err)
       } else {

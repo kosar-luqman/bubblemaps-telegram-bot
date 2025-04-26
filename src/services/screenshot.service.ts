@@ -54,6 +54,7 @@ export async function generateScreenshot(
 
   await page.screenshot({ path: filePath })
   await page.close() // Close page but keep browser running
+  await closeBrowser() // Close browser
 
   return filePath
 }
