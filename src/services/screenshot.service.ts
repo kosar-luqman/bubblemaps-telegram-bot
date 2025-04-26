@@ -41,12 +41,12 @@ export async function generateScreenshot(
   // Optimize page navigation
   await page.goto(url, {
     waitUntil: "domcontentloaded", // Less strict than networkidle2
-    timeout: 30000, // 30 second timeout
+    timeout: 0, // 30 second timeout
   })
 
   // Wait for just the essential element with a timeout
   try {
-    await page.waitForSelector("#svg", { timeout: 30000 })
+    await page.waitForSelector("#svg", { timeout: 0 })
   } catch (error) {
     console.error("Timeout waiting for SVG element")
     // Take screenshot anyway to see what's happening
