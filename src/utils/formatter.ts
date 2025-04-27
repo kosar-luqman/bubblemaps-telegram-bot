@@ -4,7 +4,6 @@ export function formatTokenInfo(
   data: TokenData,
   decentralizationScore: number
 ): string {
-  // i want to show the market cap for example 1,000,000,000.00 to 1B and 1,000,000.00 to 1M
   return `
 Name: ${data?.baseToken?.name || "N/A"}
 Symbol: ${data?.baseToken?.symbol || "N/A"}
