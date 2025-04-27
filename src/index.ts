@@ -14,60 +14,11 @@ const bot = new TelegramBot(token, {
   polling: true,
 })
 
-// Create menu keyboard
-const getMainMenuKeyboard = () => {
-  return {
-    reply_markup: {
-      keyboard: [
-        [{ text: "/start" }],
-        [{ text: "/about" }],
-        [{ text: "/blockchains" }],
-      ],
-      resize_keyboard: true,
-    },
-  }
-}
-
 // Start command handler
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id
 
-  bot.sendMessage(
-    chatId,
-    "Send me a token contract address to get its info!",
-    getMainMenuKeyboard()
-  )
-})
-
-// About command handler
-bot.onText(/\/about/, (msg) => {
-  const chatId = msg.chat.id
-  bot.sendMessage(
-    chatId,
-    "This bot analyzes token contracts and provides information about their decentralization, distribution, and gets screenshots of bubbles for tokens from bubblemaps website.",
-    getMainMenuKeyboard()
-  )
-})
-
-// Blockchains command handler
-bot.onText(/\/blockchains/, (msg) => {
-  const chatId = msg.chat.id
-  bot.sendMessage(
-    chatId,
-    "Currently supported blockchains:\n\n" +
-      "• Ethereum (ETH)\n" +
-      "• BNB Chain (BNB)\n" +
-      "• Fantom (FTM)\n" +
-      "• Avalanche (AVAX)\n" +
-      "• Cronos (CRO)\n" +
-      "• Arbitrum (ARB)\n" +
-      "• Polygon (MATIC)\n" +
-      "• Base (BASE)\n" +
-      "• Solana (SOL)\n" +
-      "• Sonic (SONIC)\n\n" +
-      "Send me a token contract address from any of these networks!",
-    getMainMenuKeyboard()
-  )
+  bot.sendMessage(chatId, "Send me a token contract address to get its info!")
 })
 
 // Handle all text messages
@@ -84,8 +35,7 @@ bot.on("message", async (msg) => {
   if (!isValidAddress(contract)) {
     return bot.sendMessage(
       chatId,
-      "❌ Invalid address. Please send a valid contract address.",
-      getMainMenuKeyboard()
+      "❌ Invalid address. Please send a valid contract address."
     )
   }
 
@@ -102,8 +52,7 @@ bot.on("message", async (msg) => {
     if (!tokenData) {
       return bot.sendMessage(
         chatId,
-        "❌ Unsupported blockchain. Please send a valid contract address.",
-        getMainMenuKeyboard()
+        "❌ Unsupported blockchain. Please send a valid contract address."
       )
     }
 
@@ -132,7 +81,6 @@ bot.on("message", async (msg) => {
       image,
       {
         caption,
-        reply_markup: getMainMenuKeyboard().reply_markup,
       },
       {
         contentType: "image/png",
@@ -156,8 +104,7 @@ bot.on("message", async (msg) => {
     console.error(err)
     bot.sendMessage(
       chatId,
-      "❌ Could not retrieve data. Make sure the address is supported.",
-      getMainMenuKeyboard()
+      "❌ Could not retrieve data. Make sure the address is supported."
     )
   }
 })
