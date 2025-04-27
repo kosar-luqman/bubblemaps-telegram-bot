@@ -29,11 +29,12 @@ Before running the project, you need a Telegram Bot Token. Here's how to create 
 2. Start a chat with BotFather and click /start.
 3. Send the command /newbot to create a new bot.
 4. Follow the instructions:
+   
    . Choose a name for your bot (can be anything, like "BubbleMapsBot").
+   
    . Choose a username for your bot (must end with bot, like "bubblemaps_visual_bot").
-
-5. After creating the bot, BotFather will send you a Bot Token.
-6. Copy the Bot Token and paste it into your .env file like this:
+6. After creating the bot, BotFather will send you a Bot Token.
+7. Copy the Bot Token and paste it into your .env file like this:
 
 ```env
 BOT_TOKEN=your_telegram_bot_token
